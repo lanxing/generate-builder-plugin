@@ -27,4 +27,91 @@
 5. 进入需要生成builder的maven模块(如果工程有多模块则需要进入子模块),运行 mvn com.lanxing.plugin:builder-maven-plugin:1.0-SNAPSHOT:touch -Decho.class=com.lanxing.plugin.model.Demo 将Decho.class修改为需要生成builder的类
 
 
+### 示例
 
+```java
+public class Demo {
+
+    private Integer demoId;
+
+    private String demoName;
+
+    private Long demoPrice;
+
+    public Integer getDemoId() {
+        return demoId;
+    }
+
+    public void setDemoId(Integer demoId) {
+        this.demoId = demoId;
+    }
+
+    public String getDemoName() {
+        return demoName;
+    }
+
+    public void setDemoName(String demoName) {
+        this.demoName = demoName;
+    }
+
+    public Long getDemoPrice() {
+        return demoPrice;
+    }
+
+    public void setDemoPrice(Long demoPrice) {
+        this.demoPrice = demoPrice;
+    }
+}
+```
+
+生成的对应builder:
+
+```java
+/**
+ * generate by builder-plugin
+ */
+public class DemoBuilder {
+
+	/**
+	 * generate by builder-plugin Demo.demoId
+	 */
+	private Integer demoId;
+
+	/**
+	 * generate by builder-plugin Demo.demoName
+	 */
+	private String demoName;
+
+	/**
+	 * generate by builder-plugin Demo.demoPrice
+	 */
+	private Long demoPrice;
+
+	public DemoBuilder setDemoId(Integer demoId) {
+		this.demoId = demoId;
+		return this;
+	}
+
+	public DemoBuilder setDemoName(String demoName) {
+		this.demoName = demoName;
+		return this;
+	}
+
+	public DemoBuilder setDemoPrice(Long demoPrice) {
+		this.demoPrice = demoPrice;
+		return this;
+	}
+
+	/**
+	 * generate by builder-plugin
+	 * @return {@link com.lanxing.boot.service.model.Demo}
+	 */
+	public Demo build() {
+		Demo demo = new Demo();
+		demo.setDemoId(this.demoId);
+		demo.setDemoName(this.demoName);
+		demo.setDemoPrice(this.demoPrice);
+		return demo;
+	}
+}
+```
